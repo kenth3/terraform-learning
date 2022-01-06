@@ -1,0 +1,9 @@
+.terraform/*
+
+*.tfstate
+*.tfstate.*
+
+# teacher wants me to ignore the vars file
+# - could include some secret info
+# - however, I'm not going to ignore them
+# *.tfvars
