@@ -1,5 +1,5 @@
 output "vpc-id" {
-  value = aws_vpc.myapp-vpc.id
+  value = module.vpc.vpc_id
 }
 
 output "aws_ami_id" {
