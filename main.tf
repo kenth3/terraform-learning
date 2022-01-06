@@ -138,31 +138,7 @@ resource "aws_instance" "myapp-server" {
   # ec2 instance
   key_name = aws_key_pair.ssh-key.key_name
 
-  # NOTE - TF does NOT recommend using provisioners
-  # this is provided only as an example
-  connection {
-    type        = "ssh"          # (either ssh or winrm)
-    host        = self.public_ip # can use "self" when within the resource
-    user        = "ec2-user"
-    private_key = file(var.private_key_location)
-  }
-
-  provisioner "file" {
-    source      = "entry-script.sh"
-    destination = "/home/ec2-user/entry-script.sh"
-  }
-
-  provisioner "remote-exec" {
-    script = file("entry-script.sh")
-    # inline = [
-    #   "export ENV=dev",
-    #   "mkdir newdir",
-    # ]
-  }
-
-  provisioner "local-exec" {
-    command = "echo ${self.public_ip}"
-  }
+  user_data = file("entry-script.sh")
 
   tags = {
     Name = "${var.env_prefix}-server"
