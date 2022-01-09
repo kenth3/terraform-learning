@@ -12,8 +12,8 @@ module "vpc" {
   name = "my-vpc"
   cidr = var.vpc_cidr_block
 
-  azs            = [var.avail_zone]
-  public_subnets = [var.subnet_cidr_block]
+  azs            = var.avail_zones
+  public_subnets = var.subnet_cidr_blocks
 
   tags = {
     Name = "${var.env_prefix}-vpc"
