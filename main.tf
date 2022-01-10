@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "myapp-tf-state-bucket"
+    bucket = "ibs-terraform-state-bucket"
     key    = "myapp/state.tfstate"
     region = "us-east-1"
   }
@@ -12,8 +12,8 @@ module "vpc" {
   name = "my-vpc"
   cidr = var.vpc_cidr_block
 
-  azs            = var.avail_zones
-  public_subnets = var.subnet_cidr_blocks
+  azs            = [var.avail_zone]
+  public_subnets = [var.subnet_cidr_block]
 
   tags = {
     Name = "${var.env_prefix}-vpc"
